@@ -14,7 +14,7 @@ export class   Routes   {
 
           app.post('/data',  userController.processData);
 
-           app.get    ( '/test' ,  userController.sayHello  )  ;
+           app.get    ( '/test'  ,  userController.sayHello  )  ;
 
 
             app.route ('/user-create'   ). post(userController.create )  ;
@@ -27,14 +27,17 @@ export class   Routes   {
                 app. post   ('/login' ,    userController.login )
 
 
-            app.post(   '/registro'   , userController.registro     )
+               app.post(   '/registro'    , userController.registro     )
 
-app.route (      '/findone_user/:id'    )  .get( userController.findOneUser )
+             app.route (      '/findone_user/:id'    )  .get ( userController  .findOneUser )
+
+         app. route(  '/update_user/:id'     ). put (userController.updateUser     )
 
 
 
 
-          ///  HabiKlisvdacdes
+           ///  HabiKlisvdacdes
+
 
            app.route ('/create_skill'    ).post  (  skillController.createSkill );
 
@@ -42,9 +45,9 @@ app.route (      '/findone_user/:id'    )  .get( userController.findOneUser )
 
           app.route('/find_skill').get( skillController.findSkill);
 
-           app.route ('/findone_skill/:id' ).get (skillController.findOneSkill )
+           app.route ('/findone_skill/:id'  ).get (skillController.findOneSkill )
 
-           app.route('/update_skill/:id'  ).put(   skillController.updateSkill)
+           app.route('/update_skill/:id'  ).put (   skillController.updateSkill)
 
         //  Rutas para Educadcioxn
 

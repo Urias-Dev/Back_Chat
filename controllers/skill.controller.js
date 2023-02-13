@@ -31,7 +31,7 @@ import { Payload} from "../helpers/payload.js";
         }
     }
 
-    async  updateSkill  (request, response) {
+    async  updateSkill  (request ,   response) {
         const body = request. body
          const id = request.params.id;
         const query  = await SkillQueries.update(body, {
@@ -40,11 +40,11 @@ import { Payload} from "../helpers/payload.js";
 
 
         if (query ) {
-            return response.status(200).json({ok: true, data:  query.data })
+             return response.status(200).json({ok: true, data:  query.data })
          } else {
-            return response.status(403).json({ok: false, data: null})
-        }
-      }
+            return response.status(403).json({ok: false, data:  null} )
+          }
+       }
 
     async   findOneSkill (request, response ) {
          const  body = request.body
@@ -58,7 +58,7 @@ import { Payload} from "../helpers/payload.js";
              return response.status(200).json({ok: true, data: query.data })
          } else {
              return  response.status(403).json({ok: false, data:   null })
-         }
+          }
     }
 
 

@@ -58,6 +58,20 @@
          }
      }
 
+      async update (data, condition = {})  {
+         try {
+             const query = await UserModel. update( data, {where: condition})
+             if (query)   {
+                 return {ok: true, data: query}
+             }  else {
+                 return {ok: false, data: null }
+             }
+         }catch (e) {
+             console.log("erorre end queeu", e)
+         }
+     }
+
+
 
 
        async   create   ( user_id ,    nombre,   apellido_p,   apellido_m ,  pass, correo,  foto )  {
@@ -85,5 +99,6 @@
          }
      }
  }
+
 
  export const UserQueries = new  userQueries();

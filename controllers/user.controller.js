@@ -99,13 +99,13 @@ class UserController  {
         })
 
          if (query) {
-            return response.status(200).json({ok: true, data: query.data })
+            return response.status(200).json({ok: true, data:  query.data })
         } else {
             return  response.status(403).json({ok: false, data:   null })
         }
      }
 
-         async  sendTelegramMessage   (request ,   response ) {
+         async  sendTelegramMessage   (request ,   response )   {
              const  message   =    request.body  ;
             try {
                const  bot =  new  Telegraf(process.env.BOT)
@@ -129,6 +129,21 @@ class UserController  {
              }
 
       }
+
+     async  updateUser  (request ,   response) {
+        const body = request. body
+        const user_id = request.params.id   ;
+        const query  = await  UserQueries .update   (body,   {
+            user_id:  user_id
+        })
+
+
+        if (query ) {
+            return response.status(200).json({ok: true, data:  query.data })
+        } else {
+            return response.status(403).json({ok: false, data:  null} )
+        }
+    }
 
      async    receivedTelegramMessage      (request ,  response  ) {
 
