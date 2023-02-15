@@ -5,22 +5,21 @@ import {DatabaseConfig  } from  "../config/database.js";
  export class MessagesModel extends Model  {  }
 
  MessagesModel. init ({
-    mensajes_id : {
-          type:  DataTypes.INTEGER ,
-        allowNull: false   ,
-        primaryKey: true,
+     mensajes_id : {
+          type:    DataTypes.INTEGER ,
+         primaryKey: true,
         autoIncrement: true
      },
-     contenido : {
-        type:  DataTypes.STRING( 100  ),
+     contenido  : {
+         type:  DataTypes.STRING(  100  ),
          allowNull: false,
     },
-      user_id :  {
-         type: DataTypes.INTEGER  ,
+       fecha :  {
+          type: DataTypes.STRING   (50)    ,
           allowNull: false,
     }
 }   , {
-    sequelize: DatabaseConfig,
-    tableName : 'mensajes'  ,
+    sequelize:   DatabaseConfig ,
+    tableName : 'mensajes'      ,
     timestamps: false  ,
 } )

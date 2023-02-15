@@ -34,13 +34,12 @@ dotenv.config ( );
              this.io = new SocketServer    (this.http , {
                    cors: {
 
-                       origin:     '*'  ,
+                       origin:      '*'  ,
                    }
              } )
            this.routes.routes(this.app);
           this.bot = new Telegraf(process.env .BOT)
-          await this.initBotListening(this.bot )
-            await  this.SocketinitListen (this.io)
+             await  this.SocketinitListen (this.io)
       }
 
        config  () {
@@ -54,46 +53,26 @@ dotenv.config ( );
           this.app.use(cors({origin:  '*'})  ) ;
       }
 
-       async initDatabase() {
-          const connection =  await this.db.connection();
+         async initDatabase() {
+            const connection =  await this.db.connection();
           console.log(connection.message);
-      }
-
-
-      async initBotListening(bot) {
-
-             bot.on('text', (ctx) =>  {
-              console.log(' incomingo  mesasageplf', ctx.message.text);
-
-              // ctx.telegram.sendMessage( ctx.message.chat.id,  `hello  ${ ctx.state.role }`);
-
-
-              // ctx.reply(   `hello  ${ctx.state.role}` )
-          });
-
-          bot.on(' message,', (ctx) =>  {
-              console.log('message,, ', ctx.message)
-
-          }  )  ;
+         }
 
 
 
-            }
+                   async    SocketinitListen  ( io) {
 
-          async   SocketinitListen (io) {
+                         io.on  ('connection'   ,   (  socket)=> {
 
-                 io.on  ('connection'   ,   (  socket)=> {
 
-                   console.log( socket.id  )
+                            socket.on  ('message',   (contenido   )    =>    {
 
-                    socket.on('message'  , (body )   => {
-
-                       const currentDate = new Date();
-                       const currentTime = currentDate.toLocaleTimeString ( 'en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-                         socket.broadcast.emit  ('message' ,    {
-                              body  ,
-                             from :  socket.id.slice(8) ,
-                             fecha  : currentTime
+                                const currentDate = new Date   ()  ;
+                                    const currentTime = currentDate .     toLocaleTimeString  (    'en-US' , { hour: 'numeric', minute: 'numeric', hour12: true });
+                                 socket.broadcast.emit   ('message'    ,          {
+                                     from :       socket.id.slice(8)  ,
+                                     contenido     ,
+                                    fecha   :  currentTime
                         }  )
                     })
 

@@ -4,19 +4,20 @@ import { Payload } from "../helpers/payload.js";
 import req from "express/lib/request.js";
 
 class MessagesController   {
-    async  createEducation ( request,  response ) {
-        const body =  request.body;
-        console.log(body )
-        const query = await EducationQueries.create(body);
+      async         createMessages    (  request ,response ) {
+         const body =  request.body  ;
+        console.log(body   )
+           const query = await    MessagesQueries .create( body);
 
-        if (query) {
-            return response.status(200).json({ok: true, data: query})
-        } else {
-            return response.status(403).json({ok: false, data: null})
-          }
+          if (query ) {
+            return response.status(200).json({ok:  true,  data:  query }  )
+
+             }     else {
+             return response.status(403).json({ok: false, data: null})
+           }
     }
 
-    async deleteEducation (request, response) {
+       async deleteEducation (request, response) {
         const body = request.body
         console.log(body )
 
@@ -49,14 +50,14 @@ class MessagesController   {
 
 
 
-    async   findMessages   (request,  response) {
-        const  body =  request.body
+    async      findMessages    (request,  response ) {
+        const  body =  request.  body
         console.log (body  )
-        const query = await MessagesQueries.find ()
+        const query =  await MessagesQueries .find  ()
         if (query.ok) {
-            return response.status(200).json({ ok:  true, data: query.data  })
+            return response.status(200).json({ ok:  true, data: query.data   })
         } else  {
-            return  response.status(403).json({ok: false, data: null,message: "No se  encontro el datof" })
+            return  response.status(403).json({ok: false, data: null,message: "No se  encontro   d  atof" })
         }
     }
 

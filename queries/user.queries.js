@@ -1,7 +1,6 @@
  import {UserModel  } from "../models/user.model.js"
  import {raw, response} from "express";
   import {encrypt} from "../helpers/handleBcrpt.js";
- import {SkillModel} from "../models/skill.model.js";
 
 
  class userQueries  {
@@ -23,8 +22,8 @@
          async  find   () {
              try {
 
-              const query  =    await UserModel.findAll() ;
-              console.log ("queerry ejecutada user findall ", query);
+              const query  =    await UserModel.findAll () ;
+              console.log (   " queerry   ejecutada user  findall ", query);
               if (query )    {
                  return {ok: true,    data: query };
              }
@@ -32,7 +31,8 @@
              console.log("error  al  e jercutar query ", e)
              return {ok: false, data :  null }
          }
-      }
+
+       }
 
       async     findOne (  condition    =  {} ) {
          try {

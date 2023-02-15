@@ -2,9 +2,7 @@ import {request  , response }  from "express" ;
 import  {UserQueries } from "../queries/user.queries.js"
 import { Payload} from "../helpers/payload.js";
 import {encrypt} from "../helpers/handleBcrpt.js"
-import {Telegraf} from "telegraf";
-import App from "../config/config.js"
-import {SkillQueries} from "../queries/skill.queries.js";
+ import App from "../config/config.js"
 
 class UserController  {
 
@@ -42,7 +40,7 @@ class UserController  {
 
             async     findAll ( request    , response ) {
            const body =  request.body;
-            console.log(" bodyg : ", body )
+            console.log(" bodyg : ", body  )
            const  condition  = body.condition ;
         const query = await    UserQueries.find ();
         console .log(query  )
@@ -105,30 +103,7 @@ class UserController  {
         }
      }
 
-         async  sendTelegramMessage   (request ,   response )   {
-             const  message   =    request.body  ;
-            try {
-               const  bot =  new  Telegraf(process.env.BOT)
 
-
-
-                await  bot.telegram. sendMessage ( 1976750044,  message.message   )
-
-
-                 return response.status( 200).send({
-                  ok: true ,
-                  data: null
-              } )
-
-              } catch  (e) {
-                console.log(" errror en tedlegr ,aff bot ", e)
-               return response.status(400).send({
-                   ok: false,
-                   data: null
-               })
-             }
-
-      }
 
      async  updateUser  (request ,   response) {
         const body = request. body
@@ -145,17 +120,7 @@ class UserController  {
         }
     }
 
-     async    receivedTelegramMessage      (request ,  response  ) {
 
-             const  bot =   new  Telegraf(process.env.BOT )
-
-           const data = await bot.telegram
-
-            const res = await App.getMessage();
-
-         return response.status(200).json({content: res  })
-
-     }
 
       async   registro (request,   response) {
 

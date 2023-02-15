@@ -1,13 +1,14 @@
 
 import { MessagesModel} from "../models/messages.model.js"
+import {UserModel} from "../models/user.model.js";
 
 class messagesQueries {
 
      async create(data)  {
         try {
-            const query  = await MessagesModel.create(data);
+            const query  = await MessagesModel.create (data) ;
             if (query) {
-                return {ok: true, data: query}
+                return {ok: true, data:  query}
             } else  {
                 return {ok: false, data: null }
             }
@@ -46,12 +47,18 @@ class messagesQueries {
     }
 
     async  find() {
-        const query = await  MessagesModel.findAll  ();
-        if ( query) {
-            return {ok: true, data: query}
-        } else {
-            return {ok:  false, data: null }
-         }
+
+        try {
+
+            const query  =     await MessagesModel.findAll  () ;
+            console.log (   " queerry   ejecutada user  findall ", query);
+            if (query )    {
+                return {ok: true,    data: query };
+            }
+        }  catch  (e ) {
+            console.log("error  al  e jercutar query ", e)
+            return {ok: false, data :  null }
+        }
     }
 
 

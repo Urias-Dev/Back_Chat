@@ -6,12 +6,12 @@ export class UserModel extends Model  {  }
           user_id:    {
             type:  DataTypes.INTEGER   ,
              primaryKey:  true       ,
-            autoIncrement: true
+             autoIncrement: true
            } ,
           nombre : {
              type  :DataTypes.STRING(30),
             allowNull: false
-        },
+          },
          apellido_p: {
              type:  DataTypes.STRING(30),
             allowNull: false
