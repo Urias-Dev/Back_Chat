@@ -5,7 +5,7 @@ import App from  './config/config.js'  ;
 
 
 
-  App.http.listen(port ,   () => console.log( 'API is f running   port ',port)    )       ;
+  App.http.listen(port ,   ()    => console.log( 'API is  nf running   port ',port )     )       ;
 
 
 

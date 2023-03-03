@@ -24,7 +24,7 @@ export class Routes {
         app.post('/login', userController.login)
 
 
-         app.post('/registro', userController.registro)
+         app.post('/registro',    userController.registro )
 
         app.route('/findone_user/:id').get(userController.findOneUser)
 
@@ -33,9 +33,9 @@ export class Routes {
 
 
 
-           app. route( '/create_messages'          ) .post        (messagesController.createMessages   )
+           app. route( '/create_messages'           ) .post        ( messagesController.createMessages    )
 
-      app. route(  '/find_message'  ).get (messagesController.findMessages )
+      app. route(  '/find_message'  ).get (messagesController .findMessages   )
 
 
        }

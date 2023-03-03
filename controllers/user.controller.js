@@ -17,7 +17,7 @@ class UserController  {
             } )
      }
 
-    async processData  (request  ,  response ){
+      async processData  (request  ,  response ){
         const body = request.body ;
         console.log('datr  flrom front', body);
     return response.status( 403 ).json({ok: true, message:    '  data received  '})  ;
@@ -39,13 +39,10 @@ class UserController  {
 
 
             async     findAll ( request    , response ) {
-           const body =  request.body;
-            console.log(" bodyg : ", body  )
-           const  condition  = body.condition ;
-        const query = await    UserQueries.find ();
-        console .log(query  )
-        if (query  ) {
-            return response.status(200).json({ok: true, data:  query.data  })
+
+          const query = await    UserQueries.find  ()  ;
+         if (query  ) {
+            return response.status(200).json({ok: true, data:  query.data    })
         }
         else   {
             return response.status(403).json({ok: false,  data: null })
@@ -92,7 +89,7 @@ class UserController  {
 
     async   findOneUser  (request, response  ) {
         const   user_id   = request.params.id;
-         const query =   await UserQueries.findOne_user     ({
+         const query =    await UserQueries.findOne_user     ({
             user_id : user_id
         })
 

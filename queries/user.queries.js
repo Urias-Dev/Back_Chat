@@ -23,9 +23,9 @@
              try {
 
               const query  =    await UserModel.findAll () ;
-              console.log (   " queerry   ejecutada user  findall ", query);
-              if (query )    {
-                 return {ok: true,    data: query };
+
+               if (query )    {
+                 return {ok: true,    data: query } ;
              }
           }  catch  (e ) {
              console.log("error  al  e jercutar query ", e)

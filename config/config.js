@@ -2,48 +2,55 @@ import  express from 'express';
 import cors from  'cors';
 import http from 'http';
 import dotenv from 'dotenv'   ;
- import {Telegraf} from "telegraf";
-import {Database} from "../config/database.js";
+ import {Telegraf}   from "telegraf";
+import {Database }  from   "../config/database.js";
 import {Routes} from '../routes/routes.js';
 
  import  { Server as  SocketServer }   from  'socket.io'  ;
+import {SocketIo }      from "./socket.js";
 
 dotenv.config ( );
 
   class   App {
 
-        app = express.application;
+        app  =     express.application ;
 
         http = null
       routes = new Routes();
       bot = null;
         db = new Database();
-        io = null ;
+
+        socket = new SocketIo()
+        io =   null ;
 
 
       constructor () {
-              this.initializeApp   ()
+               this.initializeApp   ()
        }
 
 
-           async initializeApp() {
-           this.app = express ();
+           async initializeApp()   {
+             this.app = express  ();
            this.config()
-          this.http  = http.createServer(this.app )
-             await this.initDatabase    ();
-             this.io = new SocketServer    (this.http , {
-                   cors: {
+          this.http  = http.createServer (this.app )
+              await this .initDatabase    ();
+               this.  io =    new SocketServer        (this.http    ,  {
+                   cors:  {
 
                        origin:      '*'  ,
                    }
-             } )
+                } )
+
+               await  this.initSocket  (   this.io   )
+
+
+
            this.routes.routes(this.app);
           this.bot = new Telegraf(process.env .BOT)
-             await  this.SocketinitListen (this.io)
-      }
+       }
 
        config  () {
-          this.app.use(
+          this. app.use(
               express.urlencoded({
                    extended: true
                }))
@@ -53,32 +60,21 @@ dotenv.config ( );
           this.app.use(cors({origin:  '*'})  ) ;
       }
 
-         async initDatabase() {
-            const connection =  await this.db.connection();
-          console.log(connection.message);
+         async initDatabase()  {
+            const connection =  await this.db.   connection();
+           console.log(connection.message);
+
          }
 
 
+        async  initSocket  (io )   {
+             await this.socket .  SocketinitListen (io     ) ;
 
-                   async    SocketinitListen  ( io) {
-
-                         io.on  ('connection'   ,   (  socket)=> {
-
-
-                            socket.on  ('message',   (contenido   )    =>    {
-
-                                const currentDate = new Date   ()  ;
-                                    const currentTime = currentDate .     toLocaleTimeString  (    'en-US' , { hour: 'numeric', minute: 'numeric', hour12: true });
-                                 socket.broadcast.emit   ('message'    ,          {
-                                     from :       socket.id.slice(8)  ,
-                                     contenido     ,
-                                    fecha   :  currentTime
-                        }  )
-                    })
+      }
 
 
-            }   )
-        }
+
+
   }
 
 
