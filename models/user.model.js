@@ -20,7 +20,7 @@ export class UserModel extends Model  {  }
               type:  DataTypes.STRING(30 ),
             allowNull: false
 
-          },
+           },
 
 
          pass: {

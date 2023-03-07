@@ -41,7 +41,7 @@ class UserController  {
             async     findAll ( request    , response ) {
 
           const query = await    UserQueries.find  ()  ;
-         if (query  ) {
+         if (query   ) {
             return response.status(200).json({ok: true, data:  query.data    })
         }
         else   {
@@ -102,7 +102,7 @@ class UserController  {
 
 
 
-     async  updateUser  (request ,   response) {
+     async  updateUser  (request ,   response)  {
         const body = request. body
         const user_id = request.params.id   ;
         const query  = await  UserQueries .update   (body,   {

@@ -13,27 +13,27 @@ export class Routes {
 
         app.post('/data',  userController. processData     );
 
-        app.get('/test',     userController.  sayHello) ;
+        app.get('/test' ,       userController.  sayHello) ;
 
 
-        app.route('/user-create').post(userController.create);
+        app.route('/user-create').  post(userController.create);
 
 
-        app.route('/find_user').get(userController .findAll) ;
+        app.get(  '/find_all'  , userController  .   findAll   )   ;
 
         app.post('/login', userController.login)
 
 
-         app.post('/registro',    userController.registro )
+         app.post('/registro',    userController.registro   )
 
-        app.route('/findone_user/:id').get(userController.findOneUser)
+        app.route('/findone_user/:id'). get(userController.findOneUser)
 
-           app.route( '/update_user/:id'  ).put(userController .updateUser )
-
-
+           app.route( '/update_user/:id'  ).put(userController .updateUser  )
 
 
-           app. route( '/create_messages'           ) .post        ( messagesController.createMessages    )
+
+
+           app. route(  '/create_messages'      ) .post           ( messagesController  .createMessages    )
 
       app. route(  '/find_message'  ).get (messagesController .findMessages   )
 

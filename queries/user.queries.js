@@ -20,9 +20,9 @@
 
 
          async  find   () {
-             try {
+             try  {
 
-              const query  =    await UserModel.findAll () ;
+              const query  =     await UserModel.findAll () ;
 
                if (query )    {
                  return {ok: true,    data: query } ;

@@ -61,7 +61,7 @@ dotenv.config ( );
       }
 
          async initDatabase()  {
-            const connection =  await this.db.   connection();
+            const connection =  await this.db.   connection()  ;
            console.log(connection.message);
 
          }
