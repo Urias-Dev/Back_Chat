@@ -1,79 +1,72 @@
+import {ChatModel} from "../models/chat.model.js"
 
-import   {  ChatModel  }  from  "../models/chat.model.js"
-
-import {Op }   from "sequelize" ;
+import {Op} from "sequelize" ;
 import {MessagesModel} from "../models/messages.model.js";
 
-class  ChatQueries    {
+class ChatQueries {
 
 
+    async create(user1, user2) {
 
-      async create    (user1, user2   )     {
+        try {
+            const query = await ChatModel.create({
 
-          try
-        {
-            const query  = await  ChatModel.   create ( {
-
-                 user1 : user1  ,
+                user1: user1,
                 user2: user2
-            })  ;
-            if  (query) {
-                console.log (query.id )
-                return {ok: true, data  : query }
-            } else  {
-                return {ok: false, data: null  }
+            });
+            if (query) {
+                console.log(query.id)
+                return {ok: true, data: query}
+            } else {
+                return {ok: false, data: null}
             }
-        } catch  (e )  {
-            console.log("error al ejecutar query" ,   e )
+        } catch (e) {
+            console.log("error al ejecutar query", e)
 
         }
     }
 
 
-      async    find   (  id1, id2       ){
+    async find(id1, id2) {
 
-          try {
+        try {
             console.log('Llamada a la función findChat');
             console.log('query de chats');
             //primero checo en mensajes si existen mensajes
-               console.log ("buscando mensajesf  ");
+            console.log("buscando mensajesf  ");
 
-               const query  = await ChatModel.findOne  (    {
+            const query = await ChatModel.findOne({
 
 
-                       where : {
-                        [    Op  .or  ] :  [
-                          { user1: id1, user2: id2   },
-                        { user1  :  id2  ,   user2: id1     }
+                where: {
+                    [Op.or]: [
+                        {user1: id1, user2: id2},
+                        {user1: id2, user2: id1}
 
-                        ]
+                    ]
                 }
 
-              } )  ;
+            });
 
 
+            if (query) {
 
-                if (query   )  {
+                return {ok: true, data: query}
 
-                    return    {ok: true  ,  data : query  }
-
-                 }  else {
-                    return  {ok:  false  }
-                }
-
-
+            } else {
+                return {ok: false}
             }
-           catch ( error) {
-            console.log ('error al ejecutar query DDMN  ,'     ,  error   ) ;
-            return {ok:  false, data : null  };
+
+
+        } catch (error) {
+            console.log('error al ejecutar query DDMN  ,', error);
+            return {ok: false, data: null};
         }
 
 
-
-      }
-
+    }
 
 
-  }
+}
 
-   export const    chatQueries  = new    ChatQueries   ( )  ;
+export const chatQueries = new ChatQueries();
