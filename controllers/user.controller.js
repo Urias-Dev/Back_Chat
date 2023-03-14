@@ -27,7 +27,7 @@ class UserController  {
           const body = request.body  ;
           console.log(body    )
         const  pass   =   await encrypt.encrypt (body.pass )
-        const query      =     await UserQueries.create    (body .user_id ,   body.nombre,   body.apellido_p,  body.apellido_m , pass, body.correo,  body.foto ) ;
+        const query      =     await UserQueries.create     (body .user_id ,   body.nombre,   body.apellido_p,  body.apellido_m , pass, body.correo,  body.foto ) ;
         if ( query.ok   ) {
             return response.status(200).json({ok: true,   data: query.data});
         }else {
@@ -40,7 +40,7 @@ class UserController  {
 
             async     findAll ( request    , response ) {
 
-          const query = await    UserQueries.find  ()  ;
+          const query = await    UserQueries.   find   ()   ;
          if (query   ) {
             return response.status(200).json({ok: true, data:  query.data    })
         }
@@ -126,7 +126,7 @@ class UserController  {
              const  password  =   await encrypt.encrypt (body.password)
 
 
-          const query =await    UserQueries.createUser(body.id, body.nombre, body.apellido,  body.email, body.username,  password, body.foto, body.profesion, body.descripcion  )
+          const query =await    UserQueries. createUser(body.id, body.nombre, body.apellido,  body.email, body.username,  password, body.foto, body.profesion, body.descripcion  )
 
          if (query) {
             return response.status(200).json({ok: true, data: query})

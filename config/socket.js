@@ -1,8 +1,4 @@
 
-import { Server } from 'socket.io'  ;
-import { Op } from 'sequelize';
-import { UserModel } from '../models/user.model.js' ;
-
 
 
 
@@ -19,23 +15,20 @@ export class  SocketIo      {
 
 
 
-            io.on   ( 'connection'   ,   (  socket ) =>   {
+            io.on  ( 'connection'    ,   (  socket  ) =>   {
 
 
 
-            socket.on  ('message', async    (contenido    )    =>    {
+            socket.on  ('message'   , async    (contenido    )    =>    {
 
-                const currentDate = new Date   ()  ;
-                const currentTime =    currentDate .    toLocaleTimeString      (     'en-US' , { hour: 'numeric', minute: 'numeric', hour12: true });
-                 socket.broadcast.emit     ('message'     ,            {
-                    from :       socket.id.slice(8)  ,
-                    contenido     ,
-                      fecha   :  currentTime
-                }  )
+                const currentDate  = new Date   ()  ;
+                 const currentTime =    currentDate .    toLocaleTimeString      (     'en-US' , { hour: 'numeric', minute: 'numeric', hour12: true });
+
+                   socket.broadcast.emit     ('message'    ,  contenido )
             })
 
-                 socket.on ('disconnect'  ,    async ()  => {
-                    console.log('user disconnected', socket.  id     )  ;
+                 socket.on ('disconnect'  ,    async ()   => {
+                    console.log('user disconnected', socket.  id     )   ;
 
                   } )    ;
 

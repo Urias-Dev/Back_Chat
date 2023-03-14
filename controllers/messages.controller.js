@@ -4,10 +4,10 @@ import { Payload } from "../helpers/payload.js";
 import req from "express/lib/request.js";
 
 class  MessagesController    {
-      async         createMessages     (  request ,response ) {
-         const body =  request.body  ;
-        console.log(body   )
-           const query = await     MessagesQueries .create( body);
+       async         createMessages     (  request ,response ) {
+          const body =  request.body  ;
+            console.log(body    )
+            const  query  =  await     MessagesQueries  .create ( body ) ;
 
           if (query ) {
             return response.status(200).json({ok:  true,  data:  query }  )
@@ -17,7 +17,7 @@ class  MessagesController    {
            }
     }
 
-       async deleteEducation (request, response) {
+       async deleteEducation (request, response ) {
         const body = request.body
         console.log(body )
 
@@ -44,7 +44,7 @@ class  MessagesController    {
         if (query.ok ) {
             return response.status(200).json({ok: true, data:  query.data})
         } else {
-            return response.status(403).json({ok: false, data: null})
+            return response.status(403).json({ok: false,  data: null})
         }
      }
 

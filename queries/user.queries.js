@@ -19,7 +19,7 @@
       }
 
 
-         async  find   () {
+         async  find   ( ) {
              try  {
 
               const query  =     await UserModel.findAll () ;
@@ -27,8 +27,8 @@
                if (query )    {
                  return {ok: true,    data: query } ;
              }
-          }  catch  (e ) {
-             console.log("error  al  e jercutar query ", e)
+          }  catch  (e )  {
+             console.log("error  al  e jercutar queryc ", e)
              return {ok: false, data :  null }
          }
 

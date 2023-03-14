@@ -1,12 +1,14 @@
 
 import { MessagesModel} from "../models/messages.model.js"
 import {UserModel} from "../models/user.model.js";
+import {ChatModel} from "../models/chat.model.js";
+import {Op} from "sequelize";
 
 class messagesQueries {
 
      async create(data)  {
         try {
-            const query  = await MessagesModel.create (data) ;
+            const query  = await MessagesModel.create (data)  ;
             if (query) {
                 return {ok: true, data:  query}
             } else  {
@@ -46,14 +48,14 @@ class messagesQueries {
         }
     }
 
-    async  find() {
+    async  find (    )   {
 
         try {
 
-            const query  =     await MessagesModel.findAll  () ;
+            const query  =       await  MessagesModel.findAll  () ;
             console.log (   " queerry   ejecutada user  findall ", query);
             if (query )    {
-                return {ok: true,    data: query };
+                return {ok: true,    data: query  };
             }
         }  catch  (e ) {
             console.log("error  al  e jercutar query ", e)
@@ -62,13 +64,38 @@ class messagesQueries {
     }
 
 
-    async  findOne( condition = {}  ) {
-        const query = await  MessagesModel.findOne({where: condition});
-        if ( query ) {
-            return {ok: true, data:  query}
-        } else {
-            return {ok:  false, data: null }
+     async    findAll        ( chat_id  ){
+
+           try   {
+
+
+            const query  = await  MessagesModel   .findAll   ( {
+                  where : {
+                       [Op.or ] : [
+
+                            {
+                                 id_conversacion : chat_id
+                                }
+                        ]
+                  }
+            } )  ;
+
+
+            if (query ) {
+                 return   {ok: true ,  data : query   }
+            } else {
+                return  {ok:  false}
+            }
+
+
+
+
         }
+         catch ( error) {
+            console.log  ('error al-d ejeccutar query  '  ,  error);
+            return {ok:false, data: null };
+        }
+
     }
 }
 
