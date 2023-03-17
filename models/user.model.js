@@ -1,54 +1,27 @@
-import  {Model, DataTypes} from "sequelize";
-import {DatabaseConfig } from "../config/database.js";
+import {Model, DataTypes} from "sequelize";
+import {DatabaseConfig} from "../config/database.js";
 
-export class UserModel extends Model  {  }
-    UserModel.init (  {
-           user_id  :    {
-            type:  DataTypes.INTEGER   ,
-             primaryKey:  true       ,
-             autoIncrement: true
-           } ,
-          nombre  : {
-             type  :DataTypes.STRING(255 ),
-            allowNull: false
-          },
-         apellido_p: {
-             type:  DataTypes.STRING(255 ),
-            allowNull: false
-        } ,
-         apellido_m: {
-              type:  DataTypes.STRING   ( 255   ),
-            allowNull: false
+export class UserModel extends Model {
+}
 
-           },
-
-
-         pass: {
-          type: DataTypes.STRING(255)  ,
-          allowNull: false
-        } ,
-
-        correo:    {
-            type: DataTypes.STRING( 255 ),
-            allowNull: false,
-        },
-
-
-        foto : {
-          type: DataTypes.STRING(255 ),
-          allowNull: false
-            },
-
-        status :  {
-              type:  DataTypes.TINYINT  ,
-             allowNull: false
-        }
-
-
-       }
-     ,  {
-         sequelize:   DatabaseConfig,
-        tableName : 'usuarios' ,
-        timestamps: false  ,
+UserModel.init({
+    user_id: {
+        type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true
+    }, nombre: {
+        type: DataTypes.STRING(255), allowNull: false
+    }, apellido_p: {
+        type: DataTypes.STRING(255), allowNull: false
+    }, apellido_m: {
+        type: DataTypes.STRING(255), allowNull: false
+    }, pass: {
+        type: DataTypes.STRING(255), allowNull: false
+    }, correo: {
+        type: DataTypes.STRING(255), allowNull: false,
+    }, foto: {
+        type: DataTypes.STRING(255), allowNull: false
+    }, status: {
+        type: DataTypes.BOOLEAN, allowNull: false
     }
-) ;
+}, {
+    sequelize: DatabaseConfig, tableName: 'usuarios', timestamps: false,
+});

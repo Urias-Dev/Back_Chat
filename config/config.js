@@ -1,84 +1,64 @@
-import  express from 'express';
-import cors from  'cors';
+import express from 'express';
+import cors from 'cors';
 import http from 'http';
 import dotenv from 'dotenv'   ;
- import {Telegraf}   from "telegraf";
-import {Database }  from   "../config/database.js";
+import {Telegraf} from "telegraf";
+import {Database} from "../config/database.js";
 import {Routes} from '../routes/routes.js';
+import {Server as SocketServer} from 'socket.io'  ;
+import {SocketIo} from "./socket.js";
 
- import  { Server as  SocketServer }   from  'socket.io'  ;
-import {SocketIo }      from "./socket.js";
+dotenv.config();
 
-dotenv.config ( );
+class App {
 
-  class   App {
+    app = express.application;
+    db = new Database();
+    socket = new SocketIo()
+    routes = new Routes();
+    http = null
+    bot = null;
+    io = null;
 
-        app  =     express.application ;
+    constructor() {
+        this.initializeApp()
+    }
 
-        http = null
-      routes = new Routes();
-      bot = null;
-        db = new Database();
+    async initializeApp() {
+        this.app = express();
+        this.config()
+        this.http = http.createServer(this.app)
+        await this.initDatabase();
+        this.io = new SocketServer(this.http, {
+            cors: {
+                origin: '*',
+            }
+        })
 
-        socket = new SocketIo()
-        io =   null ;
+        await this.initSocket(this.io)
+        this.routes.routes(this.app);
+        this.bot = new Telegraf(process.env.BOT)
+    }
 
+    config() {
+        this.app.use(express.urlencoded({
+            extended: true
+        }))
+        this.app.use(express.json());
+        this.app.use(cors({origin: '*'}));
+    }
 
-      constructor () {
-               this.initializeApp   ()
-       }
+    async initDatabase() {
+        const connection = await this.db.connection();
+        console.log(connection.message);
+    }
 
+    async initSocket(io) {
+        await this.socket.SocketinitListen(io);
+    }
+}
 
-           async initializeApp()   {
-             this.app = express  ();
-           this.config()
-          this.http  = http.createServer (this.app )
-              await this .initDatabase    ();
-               this.  io =    new SocketServer        (this.http    ,  {
-                   cors:  {
-
-                       origin:      '*'  ,
-                   }
-                } )
-
-               await  this.initSocket  (   this.io   )
-
-
-
-           this.routes.routes(this.app);
-          this.bot = new Telegraf(process.env .BOT)
-       }
-
-       config  () {
-          this. app.use(
-              express.urlencoded({
-                   extended: true
-               }))
-
-          this.app.use(express.json());
-
-          this.app.use(cors({origin:  '*'})  ) ;
-      }
-
-         async initDatabase()  {
-            const connection =  await this.db.   connection()  ;
-           console.log(connection.message);
-
-         }
-
-
-        async  initSocket  (io )   {
-             await this.socket .  SocketinitListen (io     ) ;
-
-      }
-
-
-
-
-  }
-
-
-  export default new  App( )  ;
+export default new App();
 
 
 
