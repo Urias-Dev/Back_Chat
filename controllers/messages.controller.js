@@ -2,7 +2,7 @@ import {MessagesQueries} from "../queries/messages.queries.js"  ;
 
 class MessagesController {
 
-    async createMessages(request, response) {
+    async createMessages(request, response ) {
         const body = request.body;
         const query = await MessagesQueries.create(body)
         if (query) {

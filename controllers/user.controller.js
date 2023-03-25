@@ -40,18 +40,18 @@ class UserController {
             if (pass) {
                 try {
                     const token = UserController.payload.createToken(query.data);
-                    return response.status(200).send({
+                    return response.status(200).json({
                         ok: true, data: query.data, token: token,
-                     })
+                    })
                 } catch (e) {
                     console.log("Error en :", e)
-                    return response.status(403).send({
+                    return response.status(403).json({
                         ok: false, data: null
                     });
                 }
             } else {
                 console.log("contraseña invalida")
-                return response.status(403).send({
+                return response.status(403).json({
                     ok: false, data: null,
                 })
             }
